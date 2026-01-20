@@ -11,7 +11,7 @@
 #include "../vendored/FastNoiseLite.h"
 
 #define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
+#define SCREEN_HEIGHT 1280
 
 #define BOT_PANEL_HEIGHT 128
 #define BOT_PANEL_PADDING 16
