@@ -24,9 +24,9 @@ DVTPHandleInputs(
         params.camera->target.x += params.panSpeed;
     }
 
-    params.camera->zoom += 0.25 * GetMouseWheelMove();
-    if(params.camera->zoom < 0.25f) {
-        params.camera->zoom = 0.25f;
+    params.camera->zoom += 0.10f * GetMouseWheelMove();
+    if(params.camera->zoom < 0.05f) {
+        params.camera->zoom = 0.05f;
     }
     if(params.camera->zoom > 4.0) {
         params.camera->zoom = 4.0f;

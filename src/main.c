@@ -1,3 +1,4 @@
+#include "core/core.h"
 #include "input/input.h"
 #include "panes/pane_panel.h"
 #include "panes/pane_viewport.h"
@@ -5,6 +6,9 @@
 
 #define RAYGUI_IMPLEMENTATION
 #include "../vendored/raygui.h"
+
+#define FNL_IMPL
+#include "../vendored/FastNoiseLite.h"
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -15,9 +19,20 @@
 
 #define PAN_SPEED 8.0
 
+#define WORLD_SIDE_LENGTH 256
+
 int
 main(void)
 {
+    float* worldData = NULL;
+
+    printf("Generating world...\n");
+    DVTPCreateWorld((DVTPCreateWorldParams){
+        .buffer_store_ptr = &worldData,
+        .sideLength = WORLD_SIDE_LENGTH
+    });
+    printf("World generated!");
+
     InitWindow(
         SCREEN_WIDTH,
         SCREEN_HEIGHT,
@@ -49,7 +64,9 @@ main(void)
                 .width = SCREEN_WIDTH,
                 .height = VIS_HEIGHT
             },
-            .camera = camera
+            .camera = camera,
+            .worldData = worldData,
+            .worldSideLength = WORLD_SIDE_LENGTH
         });
 
         DVTPDrawPanel((DVTPDrawPanelParameters){
