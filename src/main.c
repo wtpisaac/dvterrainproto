@@ -1,3 +1,6 @@
+#include "input/input.h"
+#include "panes/pane_panel.h"
+#include "panes/pane_viewport.h"
 #include <raylib.h>
 
 #define RAYGUI_IMPLEMENTATION
@@ -10,7 +13,7 @@
 #define BOT_PANEL_PADDING 16
 #define VIS_HEIGHT SCREEN_HEIGHT - BOT_PANEL_HEIGHT
 
-#define PAN_SPEED 2.0
+#define PAN_SPEED 8.0
 
 int
 main(void)
@@ -35,87 +38,34 @@ main(void)
         .zoom = 1.0f
     };
 
-    while(true) {
+    bool shouldContinue = true;
+    while(shouldContinue) {
         BeginDrawing();
 
-        BeginScissorMode(
-            0,
-            0,
-            SCREEN_WIDTH,
-            VIS_HEIGHT
-        );
-
-        BeginMode2D(camera);
-
-        ClearBackground(GREEN);
-        DrawRectangle(
-            0.0,
-            0.0, 
-            20, 
-            20, 
-            (Color){
-                0,
-                0,
-                0,
-                255
-            }
-        );
-
-        EndMode2D();
-
-        EndScissorMode();
-
-        BeginScissorMode(
-            0, 
-            SCREEN_HEIGHT - BOT_PANEL_HEIGHT, 
-            SCREEN_WIDTH, 
-            BOT_PANEL_HEIGHT
-        );
-
-        ClearBackground(GetColor(
-            GuiGetStyle(DEFAULT, BACKGROUND_COLOR)
-        ));
-
-        GuiGroupBox(
-            (Rectangle){
-                0,
-                (SCREEN_HEIGHT - BOT_PANEL_HEIGHT) + BOT_PANEL_PADDING,
-                SCREEN_WIDTH,
-                BOT_PANEL_HEIGHT - BOT_PANEL_PADDING
+        DVTPDrawViewport((DVTPDrawViewportParameters){
+            .bounds = (Rectangle){
+                .x = 0,
+                .y = 0,
+                .width = SCREEN_WIDTH,
+                .height = VIS_HEIGHT
             },
-            "dvterrainproto"
-        );
+            .camera = camera
+        });
 
-        EndScissorMode();
+        DVTPDrawPanel((DVTPDrawPanelParameters){
+            .bounds = (Rectangle){
+                .x = 0,
+                .y = SCREEN_HEIGHT - BOT_PANEL_HEIGHT,
+                .height = BOT_PANEL_HEIGHT,
+                .width = SCREEN_WIDTH
+            },
+            .camera = camera,
+            .padding = 20
+        });
 
-        EndDrawing();
-
-        if(
-            WindowShouldClose() ||
-            IsKeyPressed(KEY_ESCAPE)) {
-            CloseWindow();
-            break;
-        }
-
-        if(IsKeyDown(KEY_UP)) {
-            camera.target.y -= PAN_SPEED;
-        }
-        if(IsKeyDown(KEY_DOWN)) {
-            camera.target.y += PAN_SPEED;
-        }
-        if(IsKeyDown(KEY_LEFT)) {
-            camera.target.x -= PAN_SPEED;
-        }
-        if(IsKeyDown(KEY_RIGHT)) {
-            camera.target.x += PAN_SPEED;
-        }
-
-        camera.zoom += 0.25 * GetMouseWheelMove();
-        if(camera.zoom < 0.25f) {
-            camera.zoom = 0.25f;
-        }
-        if(camera.zoom > 4.0) {
-            camera.zoom = 4.0f;
-        }
+        shouldContinue = DVTPHandleInputs((DVTPHandleInputsParameters){
+            .camera = &camera,
+            .panSpeed = PAN_SPEED
+        });
     }
 }

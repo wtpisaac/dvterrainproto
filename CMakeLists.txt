@@ -8,7 +8,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(vendored/raylib)
 
-add_executable(dvterrainproto src/main.c)
+add_executable(
+    dvterrainproto 
+    src/main.c 
+    src/panes/pane_viewport.c 
+    src/panes/pane_panel.c
+    src/input/input.c
+)
 
 target_link_libraries(dvterrainproto PRIVATE raylib)
 
