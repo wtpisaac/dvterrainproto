@@ -19,7 +19,7 @@
 
 #define PAN_SPEED 8.0
 
-#define WORLD_SIDE_LENGTH 256
+#define WORLD_SIDE_LENGTH 512
 
 int
 main(void)
