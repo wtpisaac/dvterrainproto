@@ -26,8 +26,13 @@ DVTPDrawViewport(DVTPDrawViewportParameters params) {
   // TODO: Limit scope to around viewport
   for(size_t y = 0; y < params.worldSideLength; y++) {
     for(size_t x = 0; x < params.worldSideLength; x++) {
+        Color modifiedColor;
         DVTPLandLevel level;
         float height = params.worldData[(y * params.worldSideLength) + x];
+        float offsetHeight = height + 1.0;
+        float absOffsetHeight = fabsf(offsetHeight);
+        float absHeight = (absOffsetHeight / 2.0);
+
         if(height < -0.5) {
             level = DVTP_LAND_LEVEL_WATER;
         } else if(height > 0.5) {
@@ -36,12 +41,8 @@ DVTPDrawViewport(DVTPDrawViewportParameters params) {
             level = DVTP_LAND_LEVEL_LAND;
         }
 
-        float absHeight = fabsf(height);
-        Color modifiedColor;
-
         switch(level) {
             case DVTP_LAND_LEVEL_LAND:
-                absHeight = fabsf(height + 0.5f);
                 modifiedColor = (Color){
                     .r = GREEN.r * absHeight,
                     .g = GREEN.g * absHeight,
