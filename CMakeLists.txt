@@ -15,6 +15,7 @@ add_executable(
     src/panes/pane_panel.c
     src/input/input.c
     src/core/core.c
+    src/render/render.c
 )
 
 target_link_libraries(dvterrainproto PRIVATE raylib)

@@ -2,6 +2,7 @@
 #include "input/input.h"
 #include "panes/pane_panel.h"
 #include "panes/pane_viewport.h"
+#include "render/render.h"
 #include <raylib.h>
 
 #define RAYGUI_IMPLEMENTATION
@@ -52,6 +53,7 @@ main(void)
         },
         .zoom = 1.0f
     };
+    DVTPCameraZoomLevel zoomLevel = DVTP_CAMERA_ZOOM_ONE;
 
     bool shouldContinue = true;
     while(shouldContinue) {
@@ -82,6 +84,7 @@ main(void)
 
         shouldContinue = DVTPHandleInputs((DVTPHandleInputsParameters){
             .camera = &camera,
+            .zoomLevel = &zoomLevel,
             .panSpeed = PAN_SPEED
         });
     }

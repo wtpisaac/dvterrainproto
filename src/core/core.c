@@ -12,6 +12,8 @@ DVTPCreateWorld(DVTPCreateWorldParams params) {
 
     fnl_state noiseState = fnlCreateState();
     noiseState.noise_type = FNL_NOISE_OPENSIMPLEX2S;
+    // noiseState.octaves = 5;
+    // noiseState.gain = 0.7;
 
     for(size_t y = 0; y < params.sideLength; y++) {
         for(size_t x = 0; x < params.sideLength; x++) {
