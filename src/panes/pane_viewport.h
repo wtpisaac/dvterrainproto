@@ -4,11 +4,13 @@
 #include <raylib.h>
 #include <stdint.h>
 
+#include "../render/render.h"
+
 typedef struct DVTPDrawViewportParameters {
     Rectangle bounds;
     Camera2D camera;
-    float* worldData;
-    uint16_t worldSideLength;
+    DVTPCameraZoomLevel zoomLevel;
+    Texture2D overworldTex;
 } DVTPDrawViewportParameters;
 
 void

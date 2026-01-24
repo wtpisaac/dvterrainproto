@@ -27,19 +27,23 @@ main(void)
 {
     float* worldData = NULL;
 
-    printf("Generating world...\n");
-    DVTPCreateWorld((DVTPCreateWorldParams){
-        .buffer_store_ptr = &worldData,
-        .sideLength = WORLD_SIDE_LENGTH
-    });
-    printf("World generated!");
-
     InitWindow(
         SCREEN_WIDTH,
         SCREEN_HEIGHT,
         "dvterrainproto"
     );
     SetTargetFPS(90);
+
+    printf("Generating world...\n");
+    DVTPCreateWorld((DVTPCreateWorldParams){
+        .buffer_store_ptr = &worldData,
+        .sideLength = WORLD_SIDE_LENGTH
+    });
+    printf("World generated!");
+    Texture2D overworldTex = DVTPGenerateWorldTexture(
+        worldData, 
+        WORLD_SIDE_LENGTH
+    );
 
     // Create 2D camera
     Camera2D camera = {
@@ -67,8 +71,7 @@ main(void)
                 .height = VIS_HEIGHT
             },
             .camera = camera,
-            .worldData = worldData,
-            .worldSideLength = WORLD_SIDE_LENGTH
+            .overworldTex = overworldTex
         });
 
         DVTPDrawPanel((DVTPDrawPanelParameters){

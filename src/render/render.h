@@ -1,3 +1,5 @@
+#include "raylib.h"
+#include <stdint.h>
 #ifndef DVTP_RENDER_H
 #define DVTP_RENDER_H 1
 
@@ -24,5 +26,8 @@ DVTPCameraZoomLevel
 zoomOut(
     DVTPCameraZoomLevel currentZoom
 );
+
+Texture2D DVTPGenerateWorldTexture(float *worldData,
+                               uint16_t worldSideLength);
 
 #endif
