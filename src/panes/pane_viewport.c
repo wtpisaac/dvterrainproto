@@ -1,9 +1,6 @@
 #include "pane_viewport.h"
 #include "raylib.h"
 
-#include <math.h>
-#include <stdlib.h>
-
 #define BASE_PANEL_SIZE 20
 
 void
