@@ -69,7 +69,7 @@ Texture2D DVTPGenerateWorldTexture(float *worldData,
 
       if (height < -0.5) {
         level = DVTP_LAND_LEVEL_WATER;
-      } else if (height > 0.5) {
+      } else if (height > 0.75) {
         level = DVTP_LAND_LEVEL_MOUNTAIN;
       } else {
         level = DVTP_LAND_LEVEL_LAND;
