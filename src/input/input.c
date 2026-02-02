@@ -16,16 +16,16 @@ DVTPHandleInputs(
         *params.zoomLevel
     ) * params.panSpeed;
 
-    if(IsKeyDown(KEY_UP)) {
+    if(IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
         params.camera->target.y -= modifiedPanSpeed;
     }
-    if(IsKeyDown(KEY_DOWN)) {
+    if(IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) {
         params.camera->target.y += modifiedPanSpeed;
     }
-    if(IsKeyDown(KEY_LEFT)) {
+    if(IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
         params.camera->target.x -= modifiedPanSpeed;
     }
-    if(IsKeyDown(KEY_RIGHT)) {
+    if(IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
         params.camera->target.x += modifiedPanSpeed;
     }
 
