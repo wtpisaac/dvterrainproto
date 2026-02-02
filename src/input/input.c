@@ -54,6 +54,8 @@ DVTPPanSpeedMultiplierForZoomLevel(
     DVTPCameraZoomLevel zoomLevel
 ) {
     switch(zoomLevel) {
+        case DVTP_CAMERA_ZOOM_HALF_ONE_TENTH:
+            return 20.0;
         case DVTP_CAMERA_ZOOM_ONE_TENTH:
             return 10.0;
         case DVTP_CAMERA_ZOOM_ONE_QUARTER:

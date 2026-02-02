@@ -6,6 +6,8 @@
 float
 DVTPRaylibCameraZoomForZoomLevel(DVTPCameraZoomLevel zoomLevel) {
     switch (zoomLevel) {
+        case DVTP_CAMERA_ZOOM_HALF_ONE_TENTH:
+          return 0.05;
         case DVTP_CAMERA_ZOOM_ONE_TENTH:
             return 0.1;
         case DVTP_CAMERA_ZOOM_ONE_QUARTER:
@@ -37,9 +39,9 @@ DVTPCameraZoomLevel
 zoomOut(
     DVTPCameraZoomLevel currentZoom
 ) {
-    if(currentZoom == DVTP_CAMERA_ZOOM_ONE_TENTH) {
+    if(currentZoom == DVTP_CAMERA_ZOOM_HALF_ONE_TENTH) {
         // min
-        return DVTP_CAMERA_ZOOM_ONE_TENTH;
+        return DVTP_CAMERA_ZOOM_HALF_ONE_TENTH;
     }
 
     return (DVTPCameraZoomLevel)(currentZoom - 1);
